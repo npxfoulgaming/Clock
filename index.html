@@ -53,23 +53,14 @@
         hours = hours % 12;
         hours = hours ? hours : 12; // '0' hour should be '12'
 
-        let formattedTime = `
-            ${hours.toString().padStart(2, '0')}:
-            ${minutes.toString().padStart(2, '0')}:
-            ${seconds.toString().padStart(2, '0')}
-            ${ampm}
-        `.trim();
-
-        // Add month, date, year, and GMT after 12:00 o'clock
-        if (hours >= 12 || ampm === 'PM') {
-            formattedTime = `${month} ${day}, ${year} ${formattedTime} GMT+5:45`;
-        }
+        // Format the time and append month, date, year, and GMT+5:45
+        const formattedTime = `${month} ${day}, ${year} ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${ampm} GMT+5:45`;
 
         document.getElementById('clock').innerHTML = formattedTime;
     }
 
     setInterval(updateClock, 1000);
-    updateClock(); // initial call to display clock immediately
+    updateClock(); // Initial call to display clock immediately
 </script>
 
 </body>
