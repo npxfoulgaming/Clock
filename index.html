@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="https://files.catbox.moe/zcy394.png"/>
-    <title>Leagcy Roleplay Nepal POV</title>
+    <title>Clock with GMT+5:45</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -37,11 +36,13 @@
         const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
         const nepalTime = new Date(utc + (5.75 * 60 * 60 * 1000)); // 5.75 hours offset for GMT+5:45
 
+        const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const monthNames = [
             "January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
         ];
 
+        const dayOfWeek = dayNames[nepalTime.getDay()];
         const day = nepalTime.getDate();
         const month = monthNames[nepalTime.getMonth()];
         const year = nepalTime.getFullYear();
@@ -54,8 +55,8 @@
         hours = hours % 12;
         hours = hours ? hours : 12; // '0' hour should be '12'
 
-        // Format the time and append month, date, year, and GMT+5:45
-        const formattedTime = `${month} ${day}, ${year} ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${ampm} GMT+5:45`;
+        // Format the time and append day, month, date, year, and GMT+5:45
+        const formattedTime = `${dayOfWeek}, ${month} ${day}, ${year} ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${ampm} GMT+5:45`;
 
         document.getElementById('clock').innerHTML = formattedTime;
     }
