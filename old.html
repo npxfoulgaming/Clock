@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="https://files.catbox.moe/zcy394.png"/>
+    <title>Legacy Roleplay Nepal Clock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .clock {
+            font-size: 2em;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+<div class="clock" id="clock"></div>
+
+<script>
+    function updateClock() {
+        const now = new Date();
+
+        // Calculate the time in GMT+5:45
+        const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+        const nepalTime = new Date(utc + (5.75 * 60 * 60 * 1000)); // 5.75 hours offset for GMT+5:45
+
+        const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const monthNames = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        const dayOfWeek = dayNames[nepalTime.getDay()];
+        const day = nepalTime.getDate();
+        const month = nepalTime.getMonth();
+        const year = nepalTime.getFullYear();
+        
+        let hours = nepalTime.getHours();
+        const minutes = nepalTime.getMinutes();
+        const seconds = nepalTime.getSeconds();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+
+        hours = hours % 12;
+        hours = hours ? hours : 12; // '0' hour should be '12'
+
+        // Format the time without GMT+5:45
+        const formattedTime = `${dayOfWeek}, ${monthNames[month]} ${day}, ${year} ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${ampm}`;
+
+        document.getElementById('clock').innerHTML = formattedTime;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock(); // Initial call to display clock immediately
+</script>
+
+</body>
+</html>
